@@ -1,13 +1,17 @@
 import Navbar from "./Navbar"
-import Body from "./Body"
+
+import { Outlet } from "react-router-dom"
+
 
 function App() {
   return (
     <>
       <Navbar></Navbar>
-      <Body></Body>
+     <Outlet></Outlet>
     </>
   )
 }
+
+
 
 export default App
