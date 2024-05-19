@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from "react"
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
   let [btnName, setBtnName] = useState("Login")
+ 
   return (
     <div>
       <div className="navbar  bg-neutral text-neutral-content">

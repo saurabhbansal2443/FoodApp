@@ -37,7 +37,7 @@ let appRouter = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+
     <RouterProvider router={appRouter}></RouterProvider>
-  </React.StrictMode>
+ 
 );

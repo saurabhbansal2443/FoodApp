@@ -1,25 +1,38 @@
 import React , {useEffect ,useState} from 'react';
 import { useParams } from 'react-router-dom';
+import useGetProduct from './utils/useGetProduct';
 
 
 const ProductPage = () => {
 
-    let [obj, setObj] = useState(null)
+    // let [obj, setObj] = useState(null)
    
 
     const {proID} = useParams();
 
-    useEffect(() => {
-        getData();
-    },[])
+    const obj = useGetProduct(proID)
 
-    let getData=async ()=>{
-        let data = await fetch(`https://fakestoreapi.com/products/${proID}`)
-        let obj = await data.json();
+    // useEffect(() => {
+    //     getData();
+    // },[])
 
-        setObj(obj)
+    // useEffect(() => {
+    //   let id = setInterval(() => {
+    //     console.log("setInterval ")
+    //   },1000)
+
+    //   return () => {
+    //     clearInterval(id)
+    //   }
+    // },[])
+
+    // let getData=async ()=>{
+    //     let data = await fetch(`https://fakestoreapi.com/products/${proID}`)
+    //     let obj = await data.json();
+
+    //     setObj(obj)
        
-    }
+    // }
 
     if (obj == null){
 
