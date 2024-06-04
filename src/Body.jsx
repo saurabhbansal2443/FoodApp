@@ -1,29 +1,40 @@
 import React from "react";
-import ResCard from "./ResCard";
+import ResCard , {promotedProduct}from "./ResCard";
 import ShimmerUI from "./ShimmerUI";
-// import data from "./Data";
-import { useState, useEffect } from "react";
+import { useState  } from "react";
 import { Link } from "react-router-dom";
+
+import useOnlineStatus from "./utils/useOnlineStatus";
+import useFetchAllCardData from "./utils/useFetchAllCardData";
+
 const Body = () => {
   let [resData, setResData] = useState([]);
   let [filtertedData , setFiltertedData] = useState([]);
   let [serach, setSearch] = useState("");
 
-  useEffect(() => {
-    getData();
-  },[]);
+  let onlineStatus = useOnlineStatus();
 
-  let getData = async () => {
-    let data = await fetch("https://fakestoreapi.com/products");
-    let obj = await data.json();
-    // console.log(obj);
-    setResData([...obj]);
-    setFiltertedData([...obj])
-  };
+ useFetchAllCardData( setResData , setFiltertedData);
+
+ let PromotedCard = promotedProduct(ResCard)
+
+ 
+
+// useEffect(() => {
+//   setResData([...data]);
+//   setFiltertedData([...data]);
+// },[data])
+
+if(onlineStatus == false){
+  return <div className="h-screen w-screen text-3xl justify-center items-center"><p > Oops , Something went wrong looks like your are not connected to internet </p></div>
+}
 
   if (resData.length == 0) {
     return <ShimmerUI></ShimmerUI>;
   }
+  
+ 
+
   return (
     <div
       style={{ minHeight: "92.9vh" }}
@@ -77,10 +88,10 @@ const Body = () => {
           </button>
         </div>
       </div>
-
+     
       <div className="cardContainer mt-5 flex flex-wrap justify-around">
         {filtertedData.map((obj) => (
-         <Link key={obj.id} to={`/product/${obj.id} `}> <ResCard obj={obj} ></ResCard></Link>
+         <Link key={obj.id}   to={`/product/${obj.id} `}> {obj.rating.count>200?<PromotedCard obj={obj}></PromotedCard>:<ResCard obj={obj} ></ResCard>} </Link>
         ))}
       </div>
     </div>

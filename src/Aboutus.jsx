@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import UserContext from './utils/UserContext';
 
 // const Aboutus = () => {
 //   return (
@@ -52,6 +53,11 @@ class Aboutus extends React.Component {
         {/* <h1>{this.state.count2}</h1> */}
         <h1>About us </h1>
         <h2> Hey I am about us page and I am also class component  </h2>
+        <h1> Logged In USER {
+          <UserContext.Consumer>
+            {(data)=> data.loggedInUser}
+          </UserContext.Consumer>
+          }</h1>
       </div>
     )
   }
